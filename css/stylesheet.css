@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 html{
     margin: 0;
 }
@@ -86,7 +90,7 @@ body {
 .navlinks {
     float: right;
     width: 92%;
-    padding-top: 1.9vw;
+    padding-top: 1.5%;
 }
 
 .logo {
@@ -104,7 +108,7 @@ body {
 
 .landingimage .centertext {
     position: absolute;
-    top: 25%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
@@ -129,18 +133,14 @@ body {
 
 .informational .column {
     float: left;
-    width: 32%;
-    padding: 0 10px;
-    display: block;
+    width: 33.33%;
+    padding: 10px;
+    text-align: center;
 }
 
 .informational .column img {
-    width: 60%;
-    padding-left: 2%;
-}
-
-.informational .row {
-    margin: 0 -5px;
+    width: 50%;
+    /* padding-left: 25%; */
 }
 
 .informational .row:after {
@@ -149,21 +149,11 @@ body {
     clear: both;
 }
 
-.informational .card {
-    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
-    padding: 16px;
-    text-align: center;
-    /* background-color: #f1f1f1; */
-}
-
 .informational p {
     color: #888888;
 }
 
-/* @media screen and (max-width: 600px) {
-  .column {
-    width: 100%;
-    display: block;
-    margin-bottom: 20px;
-  }
-} */
+.seperator{
+    padding-top: 8%;
+}
+
