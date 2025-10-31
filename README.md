@@ -1,1 +1,7 @@
-# Help me, I'm stuck in github and can only communicate through readme files
+# Alba Ferries (Alba Wildlife)
+
+Alba Ferries is a website made as part of a larger academic project - creating and designing a ferry booking system for a ficticious company.
+
+# Setup
+
+## DB Credentials 
