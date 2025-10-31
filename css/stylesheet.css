@@ -74,6 +74,7 @@ body {
     text-decoration: none;
     transition: 1s;
     font-family: "Instrument Sans", sans-serif;
+    font-size: 1.1vw;
 }
 
 .navlink:hover {
@@ -85,7 +86,7 @@ body {
 .navlinks {
     float: right;
     width: 92%;
-    padding-top: 2%;
+    padding-top: 1.9vw;
 }
 
 .logo {
