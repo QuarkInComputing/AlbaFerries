@@ -129,7 +129,7 @@ body {
 }
 
 .informational {
-    font-family: "Instrument Sans", sans-serif; 
+    font-family: "Instrument Sans", sans-serif;
 }
 
 .informational .column {
@@ -155,11 +155,10 @@ body {
 }
 
 .seperator{
-    padding-top: 8%;
+    padding-top: 2%;
 }
 
 .bookingcard{
-    /* position: absolute; */
     z-index: 9;
     background-color: #BFC0C0;
     padding-bottom: 5%;
@@ -167,13 +166,15 @@ body {
     padding-right: 2.5%;
     width: 50%;
     margin: auto;
-    transform: translateY(-175%);
+    margin-bottom: -10%;
+    transform: translateY(-85%);
     border-radius: 2vw;
 }
 
 .bookingcard .bookinglinks {
     padding-top: 2.5%;
     font-family: "Instrument Sans", sans-serif;
+    font-size: 18px;
 }
 
 .bookingcard .bookinglinks a {
@@ -194,4 +195,38 @@ body {
     font-style: italic;
     font-weight: 900;
     font-family: "Instrument Sans", sans-serif;
+}
+
+.inputfields {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding-top: 2%;
+}
+
+.inputfields input,
+.inputfields select {
+    padding: 12px;
+    width: 10vw;
+    border-radius: 6px;
+    font-family: "Instrument Sans", sans-serif;
+    cursor: pointer;
+}
+
+.bookingcard input[type="submit"] {
+    background-color: #FF4D00;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 10px;
+    width: 12%;
+    margin-left: 43%;
+    transform: translateY(120%);
+    transition: 1s;
+    cursor: pointer;
+}
+
+.bookingcard input[type="submit"]:hover {
+    background-color: #be3900;
+    transition: 1s;
 }
