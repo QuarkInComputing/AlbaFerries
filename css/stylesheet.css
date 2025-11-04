@@ -166,7 +166,7 @@ body {
     padding-right: 2.5%;
     width: 50%;
     margin: auto;
-    margin-bottom: -10%;
+    margin-bottom: -15%;
     transform: translateY(-85%);
     border-radius: 2vw;
 }
@@ -209,6 +209,10 @@ body {
     width: 10vw;
     border-radius: 6px;
     font-family: "Instrument Sans", sans-serif;
+    cursor: pointer;
+}
+
+.inputfields option {
     cursor: pointer;
 }
 
