@@ -240,8 +240,6 @@ body {
 }
 
 .logincard {
-    /* background-color: rgba(150, 150, 150, 0.8);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8); */
     padding-top: 1%;
     padding-bottom: 5%;
     padding-left: 2.5%;
@@ -277,7 +275,7 @@ body {
     color: #222222;
 }
 
-.logincard .greeting p {
+.logincard p {
     color: #444444;
 }
 
@@ -286,9 +284,11 @@ body {
 }
 
 .logincard form input[type="text"],
-.logincard form input[type="password"] {
+.logincard form input[type="password"],
+.logincard form input[type="date"] {
     padding-top: 5px;
     padding-bottom: 5px;
+    width: 60%;
 }
 
 .logincard input[type="submit"] {
@@ -304,4 +304,38 @@ body {
 .logincard input[type="submit"]:hover {
     background-color: #be3900;
     transition: 1s;
+}
+
+.animatedlink {
+    color: #d84100;
+    position: relative;
+    text-decoration: none;
+    transition: color .4s ease-out;
+}
+  
+.animatedlink:hover {
+    color: #ff6726;
+    right: 0;
+    text-decoration: none;
+}
+  
+.animatedlink:hover:after {
+    border-color: #ff6726;
+    right: 0;
+}
+  
+.animatedlink:after {
+    border-radius: 1em;
+    border-top: .1em solid #d84100;
+    content: "";
+    position: absolute;
+    right: 100%;
+    bottom: .14em;      
+    left: 0;
+    transition: right .4s cubic-bezier(0,.5,0,1),
+        border-color .4s ease-out;
+}
+  
+.animatedlink:hover:after {
+    animation: anchor-underline 2s cubic-bezier(0,.5,0,1) infinite;
 }
