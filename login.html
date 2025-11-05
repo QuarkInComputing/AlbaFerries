@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<hmtl>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Alba Wildlife</title>
+
+        <!--Stylesheets-->
+        <link id="theme-desktop" rel="stylesheet" href="css/stylesheet.css"> 
+        <link id="theme-mobile" rel="stylesheet" media="screen and (max-width: 992px)" href="css/mobile.css">
+
+        <!--Favicon-->
+
+        <!--Google Font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    </head>
+
+    <body class="login">
+        <section id="login">
+            <div class="logincard">
+                <div class="greeting">
+                    <img class="logo" src="./media/logo.webp">
+                    <h2>Welcome Back!</h2>
+                    <p>Please enter your details</p>
+                </div>
+                
+                <form id="userform" method="POST" action="#" onSubmit="return validate('login')">
+                    <table>
+                        <label for="email">Email</label><br>
+                        <input type="text" id="email" name="Email" size="60"><br>
+                        <span id="emailError" class="error"></span>
+
+                        <br>
+
+                        <label for="password">Password</label><br>
+                        <input type="password" id="password" name="Password" size="60"><br>
+                        <span id="passwordError" class="error"></span>
+
+                        <br>
+                               
+                        <input type="submit" value="Login"/>
+
+                    </table>
+                </form>
+            </div>
+        </section>
+    </body>
+</html>

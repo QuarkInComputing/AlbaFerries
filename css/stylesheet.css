@@ -233,3 +233,75 @@ body {
     background-color: #be3900;
     transition: 1s;
 }
+
+.login {
+    background-image: url('../media/large/pexels-miguel-martinez-1241576-2433283.webp');
+    background-size: 100%;
+}
+
+.logincard {
+    /* background-color: rgba(150, 150, 150, 0.8);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8); */
+    padding-top: 1%;
+    padding-bottom: 5%;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    width: 50%;
+    margin: auto;
+    margin-top: 10%;
+    border-radius: 2vw;
+    text-align: center;
+    background: rgba(136, 136, 136, 0.49);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(136, 136, 136, 1);
+}
+
+.logincard .logo {
+    width: 13%;
+}
+
+.logincard .greeting {
+    font-family: "Istok Web", sans-serif;
+    padding-bottom: 5%;
+}
+
+.logincard .greeting h2,
+.logincard .greeting p {
+    padding: 0;
+    margin: 0;
+}
+
+.logincard .greeting h2 {
+    color: #222222;
+}
+
+.logincard .greeting p {
+    color: #444444;
+}
+
+.logincard form {
+    font-family: "Instrument Sans", sans-serif;
+}
+
+.logincard form input[type="text"],
+.logincard form input[type="password"] {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.logincard input[type="submit"] {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    background-color: #FF4D00;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.logincard input[type="submit"]:hover {
+    background-color: #be3900;
+    transition: 1s;
+}
