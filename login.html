@@ -29,8 +29,11 @@
                     <p>Please enter your details</p>
                 </div>
                 
-                <form id="userform" method="POST" action="#" onSubmit="return validate('login')">
+                <form id="loginform" method="POST">
                     <table>
+
+                        <input type="hidden" name="formType" value="login">
+
                         <label for="email">Email</label><br>
                         <input type="text" id="email" name="Email" size="60"><br>
                         <span id="emailError" class="error"></span>
@@ -61,8 +64,11 @@
                     <p>Please create your account</p>
                 </div>
 
-                <form id="userform" method="POST" action="#" onSubmit="return validate('login')">
+                <form id="registerform" method="POST">
                     <table>
+
+                        <input type="hidden" name="formType" value="register">
+
                         <label for="email">Email</label><br>
                         <input type="text" id="email" name="Email" size="60"><br>
                         <span id="emailError" class="error"></span>
@@ -92,17 +98,24 @@
                         <span id="passwordError" class="error"></span>
 
                         <br>
+
+                        <label for="phone">Phone Number (+44)</label><br>
+                        <input type="text" id="phone" name="Phone" size="60" maxlength="11"><br>
+                        <span id="phoneError" class="error"></span>
+
+                        <br>
                                
                         <input type="submit" value="Login"/>
 
                     </table>
 
                     <p>Existing User?</p>
-                    <a class="animatedlink" href="#" onclick="showSection('login'); return false;">Register</a>
+                    <a class="animatedlink" href="#" onclick="showSection('login'); return false;">Login</a>
                 </form>
             </div>
         </section>
     </body>
 
     <script src="./js/sections/login.js"></script>
+    <script src="./js/ajax/loginHandler.js"></script>
 </html>

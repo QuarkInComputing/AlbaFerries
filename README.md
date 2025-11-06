@@ -36,7 +36,7 @@ FLUSH PRIVILEGES
 
 Apply changes to privileges.
 
-**Remember to create the required tables within the database via the create tables sql script.**
+**Remember to create & populate the required tables within the database via the create tables sql script.**
 
 ## DB Credentials
 

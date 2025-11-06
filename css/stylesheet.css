@@ -207,6 +207,7 @@ body {
     padding: 12px;
     width: 10vw;
     border-radius: 6px;
+    border: none;
     font-family: "Instrument Sans", sans-serif;
     cursor: pointer;
 }
