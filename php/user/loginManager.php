@@ -1,22 +1,19 @@
 <?php
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
 
     session_start();
 
-    function alert($Message){
-        echo '<script language="javascript">';
-        echo 'alert("'.$Message.'")';
-        echo '</script>';
-    }
-        include("./db/DbConnect.php");
-        include("./db//user/user.php");
-
+        include(__DIR__ . "/../db/DbConnect.php");
+        include(__DIR__ . "/user.php"); //Absolute paths to relieve the headache of ajax
 
         $Email = $_POST['Email'];
         $Password = $_POST['Password'];
 
         $type = $_POST['formType'];
 
-        $user = new user($Email);
+        $user = new user($Email, $DB);
 
         if($type == 'login') {
             $stmt = $DB->prepare("SELECT CustomerPassword FROM AlbaCustomer WHERE CustomerEmail=?");
@@ -32,9 +29,9 @@
             if(password_verify($Password, $Hash)) {
                 $_SESSION['email'] = $Email;
                 setcookie("loggedin", "true", time() + (10 * 365 * 24 *60 * 60), "/");
-                header('Location: index.html');
+                echo "redirect:index.html";
             } else {
-                alert("Incorrect Details");
+                echo "Incorrect Details";
             }
         } else { //Register
             $Forename = $_POST['Forename'];
@@ -44,23 +41,24 @@
 
             $Hash = password_hash($Password, PASSWORD_DEFAULT);
 
-            if(!$user->checkExists()){ //User doesnt exist -> create account
+            if(!$user->checkExists($Email, $DB)){ //User doesnt exist -> create account
                 $stmt = $DB->prepare("INSERT INTO AlbaCustomer (CustomerEmail, CustomerForename, CustomerSurname, CustomerDOB, CustomerPhone, CustomerTier, CustomerPassword) VALUES (?,?,?,?,?,?,?)");
-                $stmt->bind_param("sssssss", $Email, $Forename, $Surname, $DOB, $Phone, 'user', $Hash);
+                $Tier = 'user';
+                $stmt->bind_param("sssssss", $Email, $Forename, $Surname, $DOB, $Phone, $Tier, $Hash);
 
                 $stmt->execute();
 
                 $stmt->store_result();
 
-                if($stmt->num_rows > 0) {
+                if($stmt->affected_rows > 0) {
                     $_SESSION['email'] = $Email;
                     setcookie("loggedin", "true", time() + (10 * 365 * 24 *60 * 60), "/");
-                    header('Location: index.html');
+                    echo "redirect:index.html";;
                 } else {
-                    alert("Error registering, please try again.");
+                    echo "Error registering, please try again.";
                 }
             } else { //User DOES exist -> Dont create account
-                    alert("Account with email ".$Email." already exists.");
+                    echo "Account with email ".$Email." already exists.";
             }
         }
 

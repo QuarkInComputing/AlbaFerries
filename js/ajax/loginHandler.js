@@ -9,43 +9,34 @@ document.querySelectorAll('form').forEach(form => {
             console.log('Register button pressed');
         }
 
-        sendData(formType);
+        sendData(form, formType);
     });
 });
 
-function sendData(formType){
-    document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById(formType+'form')
+function sendData(form, formType) {
+    var formData = new FormData(form);
 
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
+    if (!validateClient(formType)) {
+        console.log("Validation failed");
+        return;
+    }
 
-            var formData = new FormData(form);
-
-            if(!validateClient(formType)) {
-                return;
-            }
-
-            fetch('/php/user/loginManager.php', {
-                method: 'POST',
-                body: formData
-            })
-
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    console.log('Success!')
-                } else {
-                    console.log('Error!')
-                }
-            })
-
-            .catch(error => {
-                console.error('AJAX error:', error);
-            });
-        });
+    fetch('/php/user/loginManager.php', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => response.text())
+        .then(text => {
+        if (text.startsWith('redirect:')) {
+            window.location.href = text.split(':')[1];
+        } else {
+            alert(text)
+        }
+    })
+        .catch(error => {
+        console.error('AJAX error:', error);
     });
-};
+}
 
 function validateClient (formType) {
     const emailFields = document.querySelectorAll('#email');
@@ -81,7 +72,7 @@ function validateClient (formType) {
     }
 
     if (formType == 'register' && surname == "") {
-        document.getElementById("surnameError").textCcontent = "Surname cannot be blank!";
+        document.getElementById("surnameError").textContent = "Surname cannot be blank!";
         isValid = false;
     }
 

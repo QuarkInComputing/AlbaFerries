@@ -21,7 +21,7 @@
             $stmt->fetch();
         }
 
-        function checkExists($Email) {
+        function checkExists($Email, $DB) {
             $stmt = $DB->prepare("SELECT * FROM AlbaCustomer WHERE CustomerEmail=?");
             $stmt->bind_param("s", $Email);
             $stmt->execute();
