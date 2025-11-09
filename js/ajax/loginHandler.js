@@ -82,7 +82,7 @@ function validateClient (formType) {
     // } 
     // Checking for a valid date of birth is another headache ill worry about later
 
-    if (formType == 'register' && phone == "" || phone.length < 11) {
+    if (formType == 'register' && (phone == "" || phone.length < 11)) {
         document.getElementById("surnameError").textCcontent = "Please enter a valid phone number!";
         isValid = false;
     }

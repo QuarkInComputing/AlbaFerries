@@ -41,6 +41,7 @@ body {
     font-family: "Istok Web", sans-serif;
     padding: 8px;
     font-size: 70%;
+    cursor: pointer;
 }
 
 .usericon {
@@ -339,4 +340,28 @@ body {
   
 .animatedlink:hover:after {
     animation: anchor-underline 2s cubic-bezier(0,.5,0,1) infinite;
+}
+
+.accountnav {
+    margin: auto;
+    margin-top: 1%;
+    padding: 0.5vw;
+    width: 20%;
+    background-color: #AAAAAA;
+    border-radius: 5vw;
+    text-align: center;
+    font-family: "Istok Web", sans-serif;
+}
+
+.accountlink {
+    color: #222222;
+    text-decoration: none;
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
+    transition: 1s;
+}
+
+.accountlink:hover {
+    color:#444444;
+    transition: 1s;
 }

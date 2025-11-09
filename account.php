@@ -28,7 +28,26 @@
     </head>
 
     <body>
+        <div class="topnav">
+            <div class="branding">
+                <p class="brandingtext"><b>Alba Wildlife</b> Ferries</p>
+            </div>
+            <div class="usernav">
+                <button class="userbutton"><img class="usericon uipad" src="./media/icon/language.webp">Language</button> <!-- Make this dynamic to selected language later -->
+                <a href="account.php"><button class="userbutton"><img class="usericon" src="./media/icon/account.webp"></button></a>
+            </div>
+        </div>
 
+        <div class="nav">
+            <img class="logo" src="./media/logo.webp">
+            <div class="navlinks"><script src="./js/inner/navigation.js"></script></div>
+        </div>
+
+        <div class="accountnav">
+            <a href="#" class="accountlink">Account</a>
+            <a href="#" class="accountlink">Tickets</a>
+            <a href="#" class="accountlink">Settings</a>
+        </div>
     </body>
 
 </html>
