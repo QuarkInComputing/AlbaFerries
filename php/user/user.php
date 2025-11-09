@@ -19,6 +19,11 @@
             $stmt->bind_result($Forename, $Surname, $Tier, $Password);
 
             $stmt->fetch();
+
+            $this->Forename = $Forename;
+            $this->Surname = $Surname;
+            $this->Tier = $Tier;
+            $this->Password = $Password;
         }
 
         function checkExists($Email, $DB) {

@@ -353,6 +353,10 @@ body {
     font-family: "Istok Web", sans-serif;
 }
 
+.accountmain {
+    padding-top: 5%;
+}
+
 .accountlink {
     color: #222222;
     text-decoration: none;
@@ -364,4 +368,26 @@ body {
 .accountlink:hover {
     color:#444444;
     transition: 1s;
+}
+
+.thinleftbox {
+    float: left;
+    width: 33.33%;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    font-family: "Instrument Sans", sans-serif;
+}
+
+.thickrightbox {
+    float: right;
+    width: 66.66%;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    font-family: "Instrument Sans", sans-serif;
+}
+
+.pfp{
+    width: 20%;
 }

@@ -1,9 +1,19 @@
 <?php
     session_start();
 
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
     if(!isset($_SESSION['email'])) {
         header('Location: login.html');
     }
+
+    include("./php/db/DbConnect.php");
+    include("./php/user/user.php");
+
+    $user = new user($_SESSION['email']);
+    $user->queryDetails($DB);
 ?>
 
 <!DOCTYPE html>
@@ -47,6 +57,24 @@
             <a href="#" class="accountlink">Account</a>
             <a href="#" class="accountlink">Tickets</a>
             <a href="#" class="accountlink">Settings</a>
+        </div>
+
+        <div class="accountmain">
+            <div class="thinleftbox">
+                <img class="pfp" src="./media/icon/account-large.webp">
+                <?php
+                    echo '<b><p>'.$user->getForename().' '.$user->getSurname().'</p></b>';
+                    echo '<p>'.$user->getEmail().'</p>';
+                ?>
+                <!-- 
+                Current Tickets < Ill get around to this once I have the ordering system sorted
+                Total Tickets 
+                -->
+            </div>
+
+            <div class="thickrightbox">
+                <p>Change details section here</p>
+            </div>
         </div>
     </body>
 
