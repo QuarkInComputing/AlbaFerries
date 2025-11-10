@@ -401,3 +401,9 @@ body {
 .pfp{
     width: 20%;
 }
+
+.buttonenable {
+    color: white;
+    background: #d84100;
+    transition: 2s;
+}

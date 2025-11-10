@@ -122,7 +122,7 @@
 
                         <br>
                                
-                        <input type="submit" value="Update Details" disabled="true"/>
+                        <input id="applychanges" type="submit" value="Update Details" disabled="true"/>
 
                     </table>
                 </form>
