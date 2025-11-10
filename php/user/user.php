@@ -3,6 +3,8 @@
         private $Email;
         private $Forename;
         private $Surname;
+        private $DOB;
+        private $Phone;
         private $Tier;
         private $Password; //Hashed
 
@@ -11,17 +13,19 @@
         }
 
         function queryDetails($DB) {
-            $stmt = $DB->prepare("SELECT CustomerForename, CustomerSurname, CustomerTier, CustomerPassword FROM AlbaCustomer WHERE CustomerEmail=?");
+            $stmt = $DB->prepare("SELECT CustomerForename, CustomerSurname, CustomerDOB, CustomerPhone, CustomerTier, CustomerPassword FROM AlbaCustomer WHERE CustomerEmail=?");
             $stmt->bind_param("s", $this->Email);
             $stmt->execute();
 
             $stmt->store_result();
-            $stmt->bind_result($Forename, $Surname, $Tier, $Password);
+            $stmt->bind_result($Forename, $Surname, $DOB, $Phone, $Tier, $Password);
 
             $stmt->fetch();
 
             $this->Forename = $Forename;
             $this->Surname = $Surname;
+            $this->DOB = $DOB;
+            $this->Phone = $Phone;
             $this->Tier = $Tier;
             $this->Password = $Password;
         }
@@ -59,6 +63,22 @@
 
         function getSurname() {
             return $this->Surname;
+        }
+
+        function setDOB($DOB) {
+            $this->DOB = $DOB;
+        }
+
+        function getDOB() {
+            return $this->DOB;
+        }
+
+        function setPhone($Phone) {
+            $this->Phone = $Phone;
+        }
+
+        function getPhone() {
+            return $this->Phone;
         }
 
         function setTier($Tier) {

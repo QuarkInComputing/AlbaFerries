@@ -73,9 +73,64 @@
             </div>
 
             <div class="thickrightbox">
-                <p>Change details section here</p>
+                <form id="registerform" method="POST">
+                    <table>
+
+                        <label for="email">Email</label><br>
+                        <?php
+                        echo '<input type="text" id="email" name="Email" size="60" value="'.$user->getEmail().'"><br>';
+                        ?>
+                        <span id="emailError" class="error"></span>
+
+                        <br>
+
+                        <label for="forename">Forename</label><br>
+                        <?php
+                        echo '<input type="text" id="forename" name="Forename" size="60" value="'.$user->getForename().'"><br>';
+                        ?>
+                        <span id="forenameError" class="error"></span>
+
+                        <br>
+
+                        <label for="surname">Surname</label><br>
+                        <?php
+                        echo '<input type="text" id="surname" name="Surname" size="60" value="'.$user->getSurname().'"><br>';
+                        ?>
+                        <span id="surnameError" class="error"></span>
+
+                        <br>
+
+                        <label for="dob">Date Of Birth</label><br>
+                        <?php
+                        echo '<input type="date" id="dob" name="Dob" value="'.$user->getDOB().'"><br>';
+                        ?>
+                        <span id="dobError" class="error"></span>
+
+                        <br>
+
+                        <label for="password">Password</label><br>
+                        <input type="password" id="password" name="Password" size="60"><br>
+                        <span id="passwordError" class="error"></span>
+
+                        <br>
+
+                        <label for="phone">Phone Number (+44)</label><br>
+                        <?php
+                        echo '<input type="text" id="phone" name="Phone" size="60" maxlength="11" value="'.$user->getPhone().'"><br>';
+                        ?>
+                        <span id="phoneError" class="error"></span>
+
+                        <br>
+                               
+                        <input type="submit" value="Update Details" disabled="true"/>
+
+                    </table>
+                </form>
             </div>
         </div>
     </body>
+
+    <script src="./js/account.js"></script>
+    <script src="./js/sections/account.js"></script>
 
 </html>

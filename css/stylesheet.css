@@ -382,10 +382,20 @@ body {
 .thickrightbox {
     float: right;
     width: 66.66%;
-    text-align: center;
-    align-items: center;
-    align-content: center;
+    text-align: left;
+    align-items: left;
+    align-content: left;
     font-family: "Instrument Sans", sans-serif;
+}
+
+.thickrightbox input {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    width: 20%; 
+}
+
+.thickrightbox input[type="submit"] {
+    border: none;
 }
 
 .pfp{
