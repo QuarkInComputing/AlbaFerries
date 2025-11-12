@@ -65,7 +65,7 @@
                     <img class="pfp" src="./media/icon/account-large.webp">
                     <?php
                         echo '<b><p>'.$user->getForename().' '.$user->getSurname().'</p></b>';
-                        echo '<p>'.$user->getEmail().'</p>';
+                        echo '<p>'.$_SESSION['email'].'</p>';
                     ?>
                     <!-- 
                     Current Tickets < Ill get around to this once I have the ordering system sorted
@@ -74,16 +74,16 @@
                 </div>
 
                 <div class="thickrightbox">
-                    <form id="registerform" method="POST">
+                    <form id="updateform" method="POST">
                         <table>
 
-                            <label for="email">Email</label><br>
+                            <!-- <label for="email">Email</label><br>
                             <?php
                             echo '<input type="text" id="email" name="Email" size="60" value="'.$user->getEmail().'"><br>';
                             ?>
                             <span id="emailError" class="error"></span>
 
-                            <br>
+                            <br> -->
 
                             <label for="forename">Forename</label><br>
                             <?php
@@ -142,5 +142,6 @@
 
     <script src="./js/account.js"></script>
     <script src="./js/sections/account.js"></script>
+    <script src="./js/ajax/updateHandler.js"></script>
 
 </html>

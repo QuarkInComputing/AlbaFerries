@@ -411,3 +411,7 @@ body {
 .activelink {
     text-decoration: underline !important; 
 }
+
+input[type="submit"] {
+    cursor: pointer;
+}

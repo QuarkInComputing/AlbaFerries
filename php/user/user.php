@@ -44,9 +44,25 @@
             }
         }
 
+        function updateDetails($DB, $firstEmail) {
+            $stmt = $DB->prepare("UPDATE AlbaCustomer SET CustomerForename = CONCAT(?, ''), CustomerSurname = CONCAT(?, ''), CustomerDOB = DATE_ADD(?, INTERVAL 0 DAY), CustomerPhone = CONCAT(?, ''), CustomerPassword = CONCAT(?, '') WHERE CustomerEmail = ?;");
+            //Concat will hopefully trick mysql into thinking the details have changed, even when they havent
+            $stmt->bind_param("ssssss", $this->Forename, $this->Surname, $this->DOB, $this->Phone, $this->Password, $firstEmail);
+
+            if (!$stmt->execute()) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
         //Getters & Setters
         function getEmail() {
             return $this->Email;
+        }
+
+        function setEmail($Email) {
+            $this->Email = $Email;
         }
 
         function setForename($Forename) {
@@ -58,7 +74,7 @@
         }
 
         function setSurname($Surname) {
-            $this->Surname;
+            $this->Surname = $Surname;
         }
 
         function getSurname() {
