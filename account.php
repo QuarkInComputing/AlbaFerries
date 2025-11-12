@@ -54,80 +54,90 @@
         </div>
 
         <div class="accountnav">
-            <a href="#" class="accountlink">Account</a>
-            <a href="#" class="accountlink">Tickets</a>
-            <a href="#" class="accountlink">Settings</a>
+            <a href="#" id="accountlink" class="accountlink activelink" onClick="showSection('account')">Account</a>
+            <a href="#" id="ticketlink" class="accountlink" onClick="showSection('ticket')">Tickets</a>
+            <a href="#" id ="settingslink" class="accountlink" onClick="showSection('settings')">Settings</a>
         </div>
 
-        <div class="accountmain">
-            <div class="thinleftbox">
-                <img class="pfp" src="./media/icon/account-large.webp">
-                <?php
-                    echo '<b><p>'.$user->getForename().' '.$user->getSurname().'</p></b>';
-                    echo '<p>'.$user->getEmail().'</p>';
-                ?>
-                <!-- 
-                Current Tickets < Ill get around to this once I have the ordering system sorted
-                Total Tickets 
-                -->
+        <section id="account">
+            <div class="accountmain">
+                <div class="thinleftbox">
+                    <img class="pfp" src="./media/icon/account-large.webp">
+                    <?php
+                        echo '<b><p>'.$user->getForename().' '.$user->getSurname().'</p></b>';
+                        echo '<p>'.$user->getEmail().'</p>';
+                    ?>
+                    <!-- 
+                    Current Tickets < Ill get around to this once I have the ordering system sorted
+                    Total Tickets 
+                    -->
+                </div>
+
+                <div class="thickrightbox">
+                    <form id="registerform" method="POST">
+                        <table>
+
+                            <label for="email">Email</label><br>
+                            <?php
+                            echo '<input type="text" id="email" name="Email" size="60" value="'.$user->getEmail().'"><br>';
+                            ?>
+                            <span id="emailError" class="error"></span>
+
+                            <br>
+
+                            <label for="forename">Forename</label><br>
+                            <?php
+                            echo '<input type="text" id="forename" name="Forename" size="60" value="'.$user->getForename().'"><br>';
+                            ?>
+                            <span id="forenameError" class="error"></span>
+
+                            <br>
+
+                            <label for="surname">Surname</label><br>
+                            <?php
+                            echo '<input type="text" id="surname" name="Surname" size="60" value="'.$user->getSurname().'"><br>';
+                            ?>
+                            <span id="surnameError" class="error"></span>
+
+                            <br>
+
+                            <label for="dob">Date Of Birth</label><br>
+                            <?php
+                            echo '<input type="date" id="dob" name="Dob" value="'.$user->getDOB().'"><br>';
+                            ?>
+                            <span id="dobError" class="error"></span>
+
+                            <br>
+
+                            <label for="password">Password</label><br>
+                            <input type="password" id="password" name="Password" size="60"><br>
+                            <span id="passwordError" class="error"></span>
+
+                            <br>
+
+                            <label for="phone">Phone Number (+44)</label><br>
+                            <?php
+                            echo '<input type="text" id="phone" name="Phone" size="60" maxlength="11" value="'.$user->getPhone().'"><br>';
+                            ?>
+                            <span id="phoneError" class="error"></span>
+
+                            <br>
+                                
+                            <input id="applychanges" type="submit" value="Update Details" disabled="true"/>
+
+                        </table>
+                    </form>
+                </div>
             </div>
+        </section>
 
-            <div class="thickrightbox">
-                <form id="registerform" method="POST">
-                    <table>
+        <section id="ticket">
 
-                        <label for="email">Email</label><br>
-                        <?php
-                        echo '<input type="text" id="email" name="Email" size="60" value="'.$user->getEmail().'"><br>';
-                        ?>
-                        <span id="emailError" class="error"></span>
+        </section>
 
-                        <br>
+        <section id="settings">
 
-                        <label for="forename">Forename</label><br>
-                        <?php
-                        echo '<input type="text" id="forename" name="Forename" size="60" value="'.$user->getForename().'"><br>';
-                        ?>
-                        <span id="forenameError" class="error"></span>
-
-                        <br>
-
-                        <label for="surname">Surname</label><br>
-                        <?php
-                        echo '<input type="text" id="surname" name="Surname" size="60" value="'.$user->getSurname().'"><br>';
-                        ?>
-                        <span id="surnameError" class="error"></span>
-
-                        <br>
-
-                        <label for="dob">Date Of Birth</label><br>
-                        <?php
-                        echo '<input type="date" id="dob" name="Dob" value="'.$user->getDOB().'"><br>';
-                        ?>
-                        <span id="dobError" class="error"></span>
-
-                        <br>
-
-                        <label for="password">Password</label><br>
-                        <input type="password" id="password" name="Password" size="60"><br>
-                        <span id="passwordError" class="error"></span>
-
-                        <br>
-
-                        <label for="phone">Phone Number (+44)</label><br>
-                        <?php
-                        echo '<input type="text" id="phone" name="Phone" size="60" maxlength="11" value="'.$user->getPhone().'"><br>';
-                        ?>
-                        <span id="phoneError" class="error"></span>
-
-                        <br>
-                               
-                        <input id="applychanges" type="submit" value="Update Details" disabled="true"/>
-
-                    </table>
-                </form>
-            </div>
-        </div>
+        </section>
     </body>
 
     <script src="./js/account.js"></script>

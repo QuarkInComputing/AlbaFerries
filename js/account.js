@@ -1,3 +1,5 @@
+// Detects changes
+
 const accountFields = document.querySelectorAll('input');
 const button = document.getElementById('applychanges');
 
