@@ -62,7 +62,7 @@
         <section id="account">
             <div class="accountmain">
                 <div class="thinleftbox">
-                    <img class="pfp" src="./media/icon/account-large.webp">
+                    <img class="pfp" src="./media/icon/account-large.webp" alt="profile picture">
                     <?php
                         echo '<b><p>'.$user->getForename().' '.$user->getSurname().'</p></b>';
                         echo '<p>'.$_SESSION['email'].'</p>';

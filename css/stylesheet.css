@@ -171,23 +171,35 @@ body {
     border-radius: 2vw;
 }
 
-.bookingcard .bookinglinks {
+.bookinglinks {
     padding-top: 2.5%;
+}
+
+.bookinglink {
     font-family: "Instrument Sans", sans-serif;
     font-size: 18px;
 }
 
-.bookingcard .bookinglinks a {
+.bookinglink  {
     padding-right: 2.5%;
     text-decoration: underline 2px;
     color: #FF4D00;
     transition: 1s;
 }
 
-.bookingcard .bookinglinks a:hover{
+.bookinglink:hover{
     color:#be3900;
     transition: 1s;
     text-decoration: underline 2px;
+}
+
+.disabledlink {
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 18px;
+    padding-right: 2.5%;
+    text-decoration: none;
+    color: #444444;
+    transition: 1s;
 }
 
 .bookingcard .fieldtitle {
