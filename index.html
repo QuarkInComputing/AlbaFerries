@@ -11,6 +11,8 @@
         <link id="theme-desktop" rel="stylesheet" href="css/stylesheet.css"> 
         <link id="theme-mobile" rel="stylesheet" media="screen and (max-width: 992px)" href="css/mobile.css">
 
+        <link rel="stylesheet" href="css/sections/booking.css">
+
         <!--Favicon-->
 
         <!--Google Font-->
@@ -44,11 +46,14 @@
 
         <div class="bookingcard">
             <div class="bookinglinks">
-                <a href="#" class="bookinglink">Single</a>
-                <a href="#" class="disabledlink">Return</a>
+                <a id="singlebutton" href="#" class="bookinglink" onClick="changeTicket('single')">Single</a>
+                <a id="returnbutton"href="#" class="disabledlink" onClick="changeTicket('return')">Return</a>
                 <!-- <a href="#">Multi-Book</a> -->
             </div>
             <div class="inputfields">
+
+                <input type="hidden" id="ticketType" name="tickettype" value="single">
+
                 <div>
                     <h4 class="fieldtitle">Adults</h4>
                     <input type="number" id="adults" name="adults">
@@ -79,6 +84,10 @@
                     <h4 class="fieldtitle">Departure Date</h4>
                     <input type="date" id="departure" name="departure">
                 </div>
+                <div id="returnfield">
+                    <h4 class="fieldtitle">Return Date</h4>
+                    <input type="date" id="return" name="return">
+                </div>
             </div>
             
             <input type="submit" value="Submit">
@@ -106,6 +115,7 @@
     </body>
 
     <script src="./js/booking/destinations.js"></script>
-    
+    <script src="./js/booking/links.js"></script>
+
 
 </html>
