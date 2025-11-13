@@ -42,3 +42,18 @@ Apply changes to privileges.
 
 *This step is only required if custom details were chosen.*
 
+Navigate to ``php/db/DbConnect.php``.
+
+```php
+<?php
+    DEFINE ('DB_USER', 'admin'); //Put custom username here
+    DEFINE ('DB_PASSWORD','admin'); //Put custom password here
+    DEFINE ('DB_HOST', 'localhost'); //Put custom database host here
+    DEFINE ('DB_NAME', 'Alba'); //Put custom database name here
+    $DB = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
+    if (mysqli_connect_errno())
+    {
+    echo 'Cannot connect to the database: ' . mysqli_connect_error();
+    }
+?>
+```
