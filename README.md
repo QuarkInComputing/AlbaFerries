@@ -38,7 +38,7 @@ Apply changes to privileges.
 
 **Remember to create & populate the required tables within the database via the create tables sql script.**
 
-## DB Credentials
+### DB Credentials
 
 *This step is only required if custom details were chosen.*
 
@@ -58,9 +58,9 @@ Navigate to ``php/db/DbConnect.php``.
 ?>
 ```
 
-# SQL
+## SQL
 
-## Create Script (Tables & Data)
+### Create Script (Tables & Data)
 
 If, for whatever reason, the sql files have not been provided the tables - and their data - can be generated with the following sql script:
 
