@@ -2,8 +2,8 @@
     Class ticketManager {
         private $TicketType;
         private $Adults;
-        private $Children;
         private $Teens;
+        private $Children;
         private $From;
         private $To;
         private $Departure;
@@ -121,15 +121,24 @@
             }
         }
 
-        function echoTicket($Depart, $Arrive, $Price, $NoDebug) {
+        function echoTicket($Depart, $Arrive, $Price, $FerryNo) {
             echo '<tr>';
             echo    '<td>'.$this->From.'</td>';
             echo    '<td>'.$this->To.'</td>';
             echo    '<td>'.$this->Departure.' @ '.$Depart.'</td>';
             echo    '<td>'.$this->Departure.' @ '.$Arrive.'</td>';
             echo    '<td>£'.number_format($Price, 2).'</td>'; 
-            echo    '<td><a href="#">Buy</a></td>';
-            // echo    '<td>DEBUG - USED FERRY: '.$NoDebug.'</td>';
+            echo    '<td><a href="./checkout.php?'.$this->TicketType.
+                            '&Adults='.$this->Adults.
+                            '&Teens='.$this->Teens.
+                            '&Children='.$this->Children.
+                            '&From='.$this->From.
+                            '&To='.$this->To.
+                            '&Departure='.$this->Departure.
+                            '&Return='.$this->Return.
+                            '&Day='.$this->Day.
+                            '&Ferry='.$FerryNo.
+                            '">Buy</a></td>';
             echo '</tr>';
         }
 
