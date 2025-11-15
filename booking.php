@@ -18,7 +18,6 @@
 
     include("./php/booking/getVars.php");
     $ticketManager = new ticketManager($TicketType, $Adults, $Children, $From, $To, $Departure, $Return);
-    $ticketManager->findTickets($DB);
 ?>
 
 <!DOCTYPE html>
@@ -58,8 +57,35 @@
             <div class="navlinks"><script src="./js/inner/navigation.js"></script></div>
         </div>
 
-        <h1>
-            There really should be a booking page here, huh? 
-        </h1>
+        <a class="backlink" href="..">Back to booking</a>
+
+        <div id="debug">
+            <h1>DEBUG</h1>
+            <?php
+                echo 'TicketType: ' . $TicketType . '<br>';
+                echo 'Adults: ' . $Adults . '<br>';
+                echo 'Children: ' . $Children . '<br>';
+                echo 'From: ' . $From . '<br>';
+                echo 'To: ' . $To . '<br>';
+                echo 'Departure: ' . $Departure . '<br>';
+                echo 'Return: ' . $Return . '<br>';
+            ?>
+        </div>        
+
+        <div id="tickets" class="tickets">
+            <table>
+                <tr>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Leaves</th>
+                    <th>Arrives</th>
+                    <th>Price</th>
+                    <th></th> <!-- <a href="#">Buy</a> -->
+                </tr>
+                <?php
+                    $ticketManager->findTickets($DB);
+                ?>
+            </table>
+        </div>
     </body>
 </html>

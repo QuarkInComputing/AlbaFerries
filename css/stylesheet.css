@@ -427,3 +427,25 @@ body {
 input[type="submit"] {
     cursor: pointer;
 }
+
+.tickets {
+    padding-top: 2.5%;
+}
+
+.tickets table {
+    border: 1px solid #555555;
+    border-collapse: collapse;
+    font-family: "Instrument Sans", sans-serif;
+}
+
+.tickets table th,
+.tickets table td {
+    border: 1px solid #555555;
+    padding: 1vw;
+    width: 12vw;
+}
+
+.backlink {
+    font-family: "Instrument Sans", sans-serif;
+    padding-top: 1%;
+}
