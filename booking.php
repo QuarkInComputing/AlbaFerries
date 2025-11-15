@@ -34,6 +34,7 @@
             <link id="theme-mobile" rel="stylesheet" media="screen and (max-width: 992px)" href="css/mobile.css">
 
             <!--Favicon-->
+            <div id="favicon"><script src="./js/inner/favicon.js"></script></div>
 
             <!--Google Font-->
             <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,7 +60,7 @@
 
         <a class="backlink" href="..">Back to booking</a>
 
-        <div id="debug">
+        <!-- <div id="debug">
             <h1>DEBUG</h1>
             <?php
                 echo 'TicketType: ' . $TicketType . '<br>';
@@ -72,7 +73,7 @@
                 echo 'Return: ' . $Return . '<br>';
                 echo 'Day: ' . $ticketManager->getDayVar();
             ?>
-        </div>        
+        </div>         -->
 
         <div id="tickets" class="tickets">
             <table>

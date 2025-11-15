@@ -30,6 +30,7 @@
             <link id="theme-mobile" rel="stylesheet" media="screen and (max-width: 992px)" href="css/mobile.css">
 
             <!--Favicon-->
+            <div id="favicon"><script src="./js/inner/favicon.js"></script></div>
 
             <!--Google Font-->
             <link rel="preconnect" href="https://fonts.googleapis.com">
