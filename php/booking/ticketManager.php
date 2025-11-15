@@ -3,15 +3,17 @@
         private $TicketType;
         private $Adults;
         private $Children;
+        private $Teens;
         private $From;
         private $To;
         private $Departure;
         private $Return;
         private $Day;
 
-        function __construct($TicketType, $Adults, $Children, $From, $To, $Departure, $Return) {
+        function __construct($TicketType, $Adults, $Teens, $Children, $From, $To, $Departure, $Return) {
             $this->TicketType = $TicketType;
             $this->Adults = $Adults;
+            $this->Teens = $Teens;
             $this->Children = $Children;
             $this->From = $From;
             $this->To = $To;
@@ -111,7 +113,9 @@
                         $stmt->fetch();
                         $stmt->close();
 
-                        $this->echoTicket($Depart, $Arrive, $Price, $Ferry);
+                        $TotalPrice = $Price * $this->Adults +(($this->Children * 7) + ($this->Teens * 10));
+
+                        $this->echoTicket($Depart, $Arrive, $TotalPrice, $Ferry);
                     }
                 }
             }

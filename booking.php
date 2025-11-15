@@ -17,7 +17,7 @@
     $user->queryDetails($DB);
 
     include("./php/booking/getVars.php");
-    $ticketManager = new ticketManager($TicketType, $Adults, $Children, $From, $To, $Departure, $Return);
+    $ticketManager = new ticketManager($TicketType, $Adults, $Teens, $Children, $From, $To, $Departure, $Return);
 ?>
 
 <!DOCTYPE html>
@@ -64,6 +64,7 @@
             <?php
                 echo 'TicketType: ' . $TicketType . '<br>';
                 echo 'Adults: ' . $Adults . '<br>';
+                echo 'Teens: ' . $Teens . ' <br>';
                 echo 'Children: ' . $Children . '<br>';
                 echo 'From: ' . $From . '<br>';
                 echo 'To: ' . $To . '<br>';
