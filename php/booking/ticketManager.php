@@ -7,6 +7,7 @@
         private $To;
         private $Departure;
         private $Return;
+        private $Day;
 
         function __construct($TicketType, $Adults, $Children, $From, $To, $Departure, $Return) {
             $this->TicketType = $TicketType;
@@ -17,6 +18,36 @@
             $this->Departure = $Departure;
             if(!empty($Return)) {
                 $this->Return = $Return;
+            }
+
+            $this->getDay($Departure);
+        }
+
+        function getDay($Date) {
+            $DayNo = date('w', strtotime($Date));
+            
+            switch($DayNo) {
+                case 1:
+                    $this->Day = "Mon";
+                    break;
+                case 2:
+                    $this->Day = "Tue";
+                    break;
+                case 3:
+                    $this->Day = "Wed";
+                    break;
+                case 4:
+                    $this->Day = "Thu";
+                    break;
+                case 5:
+                    $this->Day = "Fri";
+                    break;
+                case 6:
+                    $this->Day = "Sat";
+                    break;
+                case 7:
+                    $this->Day = "Sun";
+                    break;
             }
         }
 
@@ -30,9 +61,10 @@
                     WHERE RouteNo=(SELECT RouteNo FROM AlbaRoute WHERE RouteDepart=? AND RouteDestination=?) 
                     AND FerryStart < ? 
                     AND FerryEnd > ?
+                    AND FerryDay=?
                 ");
 
-                $stmt->bind_param("ssss", $this->From, $this->To, $this->Departure, $this->Departure);
+                $stmt->bind_param("sssss", $this->From, $this->To, $this->Departure, $this->Departure, $this->Day);
                 $stmt->execute();
 
                 $stmt->store_result();
@@ -41,7 +73,7 @@
                 $Ferries = [];
 
                 while($stmt->fetch()) {
-                    echo '<p>Ferry='.$FerryNo.'</p>';
+                    // echo '<p>Ferry='.$FerryNo.'</p>';
                     $Ferries[] = $FerryNo;
                 }
 
@@ -89,11 +121,11 @@
             echo '<tr>';
             echo    '<td>'.$this->From.'</td>';
             echo    '<td>'.$this->To.'</td>';
-            echo    '<td>'.$this->Departure.' & '.$Depart.'</td>';
-            echo    '<td>'.$this->Departure.' & '.$Arrive.'</td>';
-            echo    '<td>'.$Price.'</td>'; 
-            // echo    '<td><a href="#">Buy</a></td>';
-            echo    '<td>DEBUG - USED FERRY: '.$NoDebug.'</td>';
+            echo    '<td>'.$this->Departure.' @ '.$Depart.'</td>';
+            echo    '<td>'.$this->Departure.' @ '.$Arrive.'</td>';
+            echo    '<td>£'.$Price.'</td>'; 
+            echo    '<td><a href="#">Buy</a></td>';
+            // echo    '<td>DEBUG - USED FERRY: '.$NoDebug.'</td>';
             echo '</tr>';
         }
 
@@ -101,6 +133,11 @@
             echo '<tr>';
             echo    '<td>Ticket sold out</td>';
             echo '</tr>';
+        }
+
+        //Getters
+        function getDayVar() {
+            return $this->Day;
         }
     }
 ?>

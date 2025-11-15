@@ -69,6 +69,7 @@
                 echo 'To: ' . $To . '<br>';
                 echo 'Departure: ' . $Departure . '<br>';
                 echo 'Return: ' . $Return . '<br>';
+                echo 'Day: ' . $ticketManager->getDayVar();
             ?>
         </div>        
 
