@@ -67,6 +67,14 @@ If, for whatever reason, the sql files have not been provided the tables - and t
 ```sql
 use Alba;
 
+DROP TABLE IF EXISTS AlbaPassenger;
+DROP TABLE IF EXISTS AlbaBooking;
+DROP TABLE IF EXISTS AlbaFerry;
+DROP TABLE IF EXISTS AlbaRoute;
+DROP TABLE IF EXISTS AlbaCustomerDiscount;
+DROP TABLE IF EXISTS AlbaDiscount;
+DROP TABLE IF EXISTS AlbaCustomer;
+
 CREATE TABLE IF NOT EXISTS AlbaCustomer (
 	CustomerEmail varchar(50) NOT NULL,
 	CustomerForename varchar(30) NOT NULL,
@@ -115,15 +123,6 @@ CREATE TABLE IF NOT EXISTS AlbaFerry (
     foreign key (RouteNo) references AlbaRoute (RouteNo)
 );
 
-CREATE TABLE IF NOT EXISTS AlbaPassenger (
-	PassengerNo int(3) NOT NULL,
-    PassengerForename varchar(30) NOT NULL,
-    PassengerSurname varchar(40) NOT NULL,
-    PassengerAgeBracket varchar(10) NOT NULL,
-    PassengerWheelchair bool NOT NULL,
-    primary key (PassengerNo)
-);
-
 CREATE TABLE IF NOT EXISTS AlbaBooking (
 	BookingNo int(12) NOT NULL AUTO_INCREMENT,
     CustomerEmail varchar(50) NOT NULL,
@@ -132,8 +131,18 @@ CREATE TABLE IF NOT EXISTS AlbaBooking (
     BookingStatus varchar(10),
     primary key (BookingNo),
     foreign key (CustomerEmail) references AlbaCustomer (CustomerEmail),
-    foreign key (PassengerNo) references AlbaPassenger (PassengerNo),
     foreign key (FerryNo) references AlbaFerry (FerryNo)
+);
+
+CREATE TABLE IF NOT EXISTS AlbaPassenger (
+	PassengerNo int(3) NOT NULL,
+    PassengerForename varchar(30) NOT NULL,
+    PassengerSurname varchar(40) NOT NULL,
+    PassengerAgeBracket varchar(10) NOT NULL,
+    PassengerWheelchair bool NOT NULL,
+    BookingNo int(12) NOT NULL,
+    primary key (PassengerNo),
+    foreign key (BookingNo) references AlbaBooking (BookingNo)
 );
 
 INSERT INTO AlbaRoute (RouteNo, RouteDepart, RouteDestination) VALUES
