@@ -127,7 +127,7 @@
             echo    '<td>'.$this->To.'</td>';
             echo    '<td>'.$this->Departure.' @ '.$Depart.'</td>';
             echo    '<td>'.$this->Departure.' @ '.$Arrive.'</td>';
-            echo    '<td>£'.$Price.'</td>'; 
+            echo    '<td>£'.number_format($Price, 2).'</td>'; 
             echo    '<td><a href="#">Buy</a></td>';
             // echo    '<td>DEBUG - USED FERRY: '.$NoDebug.'</td>';
             echo '</tr>';
