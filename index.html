@@ -50,47 +50,49 @@
                 <a id="returnbutton"href="#" class="disabledlink" onClick="changeTicket('return')">Return</a>
                 <!-- <a href="#">Multi-Book</a> -->
             </div>
-            <div class="inputfields">
+            <form method="GET" action="booking.php">
+                <div class="inputfields">
 
-                <input type="hidden" id="ticketType" name="tickettype" value="single">
+                    <input type="hidden" id="ticketType" name="tickettype" value="single">
 
-                <div>
-                    <h4 class="fieldtitle">Adults</h4>
-                    <input type="number" id="adults" name="adults">
+                    <div>
+                        <h4 class="fieldtitle">Adults</h4>
+                        <input type="number" id="adults" name="adults">
+                    </div>
+                    <div>
+                        <h4 class="fieldtitle">Children</h4>
+                        <input type="number" id="children" name="children">
+                    </div>
+                    <div>
+                        <h4 class="fieldtitle">From</h4>
+                        <select id="from" name="from">
+                            <option value="Mallaig">Mallaig</option>
+                            <option value="Eigg">Eigg</option>
+                            <option value="Muck">Muck</option>
+                            <option value="Rum">Rum</option>
+                        </select>
+                    </div>
+                    <div>
+                        <h4 class="fieldtitle">To</h4>
+                        <select id="to" name="to">
+                            <option value="Mallaig">Mallaig</option>
+                            <option value="Eigg">Eigg</option>
+                            <option value="Muck">Muck</option>
+                            <option value="Rum">Rum</option>
+                        </select>
+                    </div>
+                    <div>
+                        <h4 class="fieldtitle">Departure Date</h4>
+                        <input type="date" id="departure" name="departure">
+                    </div>
+                    <div id="returnfield">
+                        <h4 class="fieldtitle">Return Date</h4>
+                        <input type="date" id="return" name="return">
+                    </div>
                 </div>
-                <div>
-                    <h4 class="fieldtitle">Children</h4>
-                    <input type="number" id="children" name="children">
-                </div>
-                <div>
-                    <h4 class="fieldtitle">From</h4>
-                    <select id="from" name="from">
-                        <option value="mallaig">Mallaig</option>
-                        <option value="eigg">Eigg</option>
-                        <option value="muck">Muck</option>
-                        <option value="rum">Rum</option>
-                    </select>
-                </div>
-                <div>
-                    <h4 class="fieldtitle">To</h4>
-                    <select id="to" name="to">
-                        <option value="mallaig">Mallaig</option>
-                        <option value="eigg">Eigg</option>
-                        <option value="muck">Muck</option>
-                        <option value="rum">Rum</option>
-                    </select>
-                </div>
-                <div>
-                    <h4 class="fieldtitle">Departure Date</h4>
-                    <input type="date" id="departure" name="departure">
-                </div>
-                <div id="returnfield">
-                    <h4 class="fieldtitle">Return Date</h4>
-                    <input type="date" id="return" name="return">
-                </div>
-            </div>
-            
-            <input type="submit" value="Submit">
+
+                <input type="submit" value="Submit">
+            </form>
         </div>
 
         <div class="informational">
