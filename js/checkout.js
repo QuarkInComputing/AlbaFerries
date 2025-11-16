@@ -1,4 +1,4 @@
-const checkoutFields = document.querySelectorAll('input');
+const checkoutFields = document.querySelectorAll('input:not([type="hidden"])');
 const button = document.getElementById('purchasebutton');
 
 const wheelchairFields = document.querySelectorAll('#wheelchair');

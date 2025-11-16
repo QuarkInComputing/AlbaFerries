@@ -5,24 +5,24 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
-    if(!isset($_SESSION['email'])) {
+    if (! isset($_SESSION['email'])) {
         header('Location: login.html');
     }
 
-    include("./php/db/DbConnect.php");
-    include("./php/user/user.php");
-    include("./php/booking/ticketManager.php");
+    include "./php/db/DbConnect.php";
+    include "./php/user/user.php";
+    include "./php/booking/ticketManager.php";
 
     $user = new user($_SESSION['email']);
     $user->queryDetails($DB);
 
-    include("./php/booking/getVars.php");
+    include "./php/booking/getVars.php";
     //Checkout spesefic vars
-    $Day = $_GET['day'];
-    $FerryNo = $_GET['ferry'];
+    $Day           = $_GET['day'];
+    $FerryNo       = $_GET['ferry'];
     $DepartureTime = $_GET['departuretime'];
-    $ArrivalTime = $_GET['arrivaltime'];
-    $Cost = $_GET['cost'];
+    $ArrivalTime   = $_GET['arrivaltime'];
+    $Cost          = $_GET['cost'];
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +35,7 @@
             <title>Booking</title>
 
             <!--Stylesheets-->
-            <link id="theme-desktop" rel="stylesheet" href="css/stylesheet.css"> 
+            <link id="theme-desktop" rel="stylesheet" href="css/stylesheet.css">
             <link id="theme-mobile" rel="stylesheet" media="screen and (max-width: 992px)" href="css/mobile.css">
 
             <!--Favicon-->
@@ -77,7 +77,7 @@
                 echo 'Departure Time: ' . $DepartureTime . '<br>';
                 echo 'Arrival Time: ' . $ArrivalTime . '<br>';
                 echo 'Day: ' . $Day . '<br>';
-                echo 'Ferry: '. $FerryNo;
+                echo 'Ferry: ' . $FerryNo;
             ?>
         </div> -->
 
@@ -87,82 +87,95 @@
                     <h4>Please enter your details</h4>
                     <p style="font-size: 0.6vw;"><i>These details are for the person purchasing the ticket</i></p>
                         <?php
-                        echo '<div class="checkoutfields">';
+                            echo '<div class="checkoutfields">';
                             echo '<div>';
+                            echo '<h4 class="fieldtitle">Forename</h4>';
+                            echo '<input type="text" id="bookingforename" name="bookingforename" value="' . $user->getForename() . '" maxlength="30">';
+                            echo '</div>';
+
+                            echo '<div>';
+                            echo '<h4 class="fieldtitle">Surname</h4>';
+                            echo '<input type="text" id="bookingsurname" name="bookingsurname" value="' . $user->getSurname() . '" maxlength="40">';
+                            echo '</div>';
+
+                            echo '<div>';
+                            echo '<h4 class="fieldtitle">Requires Wheelchair Access?</h4>';
+                            echo '<input type="checkbox" id="wheelchair" name="bookingwheelchair">';
+                            echo '</div>';
+                            echo '</div>';
+
+                            for ($i = 1; $i < $Adults; $i++) { // < NOT <= to account for person booking
+                                echo '<h4>Adult ' . ($i + 1) . '</h4>';
+                                echo '<div class="checkoutfields">';
+                                echo '<div>';
                                 echo '<h4 class="fieldtitle">Forename</h4>';
-                                echo '<input type="text" id="bookingforename" name="bookingforename" value="'.$user->getForename().'" maxlength="30">';
-                            echo '</div>';
+                                echo '<input type="text" id="adult' . ($i + 1) . 'forename" name="adult' . ($i + 1) . 'forename" maxlength="30">';
+                                echo '</div>';
 
-                            echo '<div>';
+                                echo '<div>';
                                 echo '<h4 class="fieldtitle">Surname</h4>';
-                                echo '<input type="text" id="bookingsurname" name="bookingsurname" value="'.$user->getSurname().'" maxlength="40">';
-                            echo '</div>';
+                                echo '<input type="text" id="adult' . ($i + 1) . 'surname" name="adult' . ($i + 1) . 'surname" maxlength="40">';
+                                echo '</div>';
 
-                            echo '<div>';
+                                echo '<div>';
                                 echo '<h4 class="fieldtitle">Requires Wheelchair Access?</h4>';
-                                echo '<input type="checkbox" id="wheelchair" name="bookingwheelchair">';
-                            echo '</div>';
-                        echo '</div>';
+                                echo '<input type="checkbox" id="wheelchair" name="adult' . ($i + 1) . 'wheelchair">';
+                                echo '</div>';
+                                echo '</div>';
+                            }
 
-                        for ($i = 1; $i < $Adults; $i++) { // < NOT <= to account for person booking
-                            echo '<h4>Adult '.($i+1).'</h4>';
-                            echo '<div class="checkoutfields">';
+                            for ($i = 1; $i <= $Teens; $i++) {
+                                echo '<h4>Teen ' . $i . '</h4>';
+                                echo '<div class="checkoutfields">';
                                 echo '<div>';
-                                    echo '<h4 class="fieldtitle">Forename</h4>';
-                                    echo '<input type="text" id="adult'.($i+1).'forename" name="adult'.($i+1).'forename" maxlength="30">';
+                                echo '<h4 class="fieldtitle">Forename</h4>';
+                                echo '<input type="text" id="teen' . $i . 'forename" name="teen' . $i . 'forename" maxlength="30">';
                                 echo '</div>';
 
                                 echo '<div>';
-                                    echo '<h4 class="fieldtitle">Surname</h4>';
-                                    echo '<input type="text" id="adult'.($i+1).'surname" name="adult'.($i+1).'surname" maxlength="40">';
+                                echo '<h4 class="fieldtitle">Surname</h4>';
+                                echo '<input type="text" id="teen' . $i . 'surname" name="teen' . $i . 'surname" maxlength="40">';
                                 echo '</div>';
 
                                 echo '<div>';
-                                    echo '<h4 class="fieldtitle">Requires Wheelchair Access?</h4>';
-                                    echo '<input type="checkbox" id="wheelchair" name="adult'.($i+1).'wheelchair">';
+                                echo '<h4 class="fieldtitle">Requires Wheelchair Access?</h4>';
+                                echo '<input type="checkbox" id="wheelchair" name="teen' . $i . 'wheelchair">';
                                 echo '</div>';
-                            echo '</div>';
-                        }
-
-                        for ($i = 1; $i <= $Teens; $i++) { 
-                            echo '<h4>Teen '.$i.'</h4>';
-                            echo '<div class="checkoutfields">';
-                                echo '<div>';
-                                    echo '<h4 class="fieldtitle">Forename</h4>';
-                                    echo '<input type="text" id="teen'.$i.'forename" name="teen'.$i.'forename" maxlength="30">';
                                 echo '</div>';
+                            }
 
+                            for ($i = 1; $i <= $Children; $i++) {
+                                echo '<h4>Child ' . $i . '</h4>';
+                                echo '<div class="checkoutfields">';
                                 echo '<div>';
-                                    echo '<h4 class="fieldtitle">Surname</h4>';
-                                    echo '<input type="text" id="teen'.$i.'surname" name="teen'.$i.'surname" maxlength="40">';
+                                echo '<h4 class="fieldtitle">Forename</h4>';
+                                echo '<input type="text" id="child' . $i . 'forename" name="child' . $i . 'forename" maxlength="30">';
                                 echo '</div>';
 
                                 echo '<div>';
-                                    echo '<h4 class="fieldtitle">Requires Wheelchair Access?</h4>';
-                                    echo '<input type="checkbox" id="wheelchair" name="teen'.$i.'wheelchair">';
-                                echo '</div>';
-                            echo '</div>';
-                        }
-
-                        for ($i = 1; $i <= $Children; $i++) {
-                            echo '<h4>Child '.$i.'</h4>';
-                            echo '<div class="checkoutfields">';
-                                echo '<div>';
-                                    echo '<h4 class="fieldtitle">Forename</h4>';
-                                    echo '<input type="text" id="child'.$i.'forename" name="child'.$i.'forename" maxlength="30">';
+                                echo '<h4 class="fieldtitle">Surname</h4>';
+                                echo '<input type="text" id="child' . $i . 'surname" name="child' . $i . 'surname" maxlength="40">';
                                 echo '</div>';
 
                                 echo '<div>';
-                                    echo '<h4 class="fieldtitle">Surname</h4>';
-                                    echo '<input type="text" id="child'.$i.'surname" name="child'.$i.'surname" maxlength="40">';
+                                echo '<h4 class="fieldtitle">Requires Wheelchair Access?</h4>';
+                                echo '<input type="checkbox" id="wheelchair" name="child' . $i . 'wheelchair">';
                                 echo '</div>';
+                                echo '</div>';
+                            }
 
-                                echo '<div>';
-                                    echo '<h4 class="fieldtitle">Requires Wheelchair Access?</h4>';
-                                    echo '<input type="checkbox" id="wheelchair" name="child'.$i.'wheelchair">';
-                                echo '</div>';
-                            echo '</div>';
-                        }
+                            echo '<input type="hidden" name="tickettype" value="' . $TicketType . '">';
+                            echo '<input type="hidden" name="adults" value="' . $Adults . '">';
+                            echo '<input type="hidden" name="teens" value="' . $Teens . '">';
+                            echo '<input type="hidden" name="children" value="' . $Children . '">';
+                            echo '<input type="hidden" name="from" value="' . $From . '">';
+                            echo '<input type="hidden" name="to" value="' . $To . '">';
+                            echo '<input type="hidden" name="departure" value="' . $Departure . '">';
+                            echo '<input type="hidden" name="return" value="' . $Return . '">';
+                            echo '<input type="hidden" name="departuretime" value="' . $DepartureTime . '">';
+                            echo '<input type="hidden" name="arrivaltime" value="' . $ArrivalTime . '">';
+                            echo '<input type="hidden" name="day" value="' . $Day . '">';
+                            echo '<input type="hidden" name="ferryno" value="' . $FerryNo . '">';
                         ?>
                 </form>
             </div>
@@ -170,20 +183,20 @@
             <div class="thickrightbox">
                 <h1>Your Order</h1>
                 <?php
-                    echo '<h2>'.$From.' ('.$DepartureTime.') - '.$To.' ('.$ArrivalTime.')';
-                    echo '<h2>'.$Departure.' ('.$Day.')</h2>';
+                    echo '<h2>' . $From . ' (' . $DepartureTime . ') - ' . $To . ' (' . $ArrivalTime . ')';
+                    echo '<h2>' . $Departure . ' (' . $Day . ')</h2>';
                     echo '<h3>Adults</h3>';
-                    echo '<p>'.$Adults.'</p>';
-                    if(!empty($Teens)){
+                    echo '<p>' . $Adults . '</p>';
+                    if (! empty($Teens)) {
                         echo '<h3>Teens</h3>';
-                        echo '<p>'.$Teens.'</p>';
+                        echo '<p>' . $Teens . '</p>';
                     }
-                    if(!empty($Children)){
+                    if (! empty($Children)) {
                         echo '<h3>Children</h3>';
-                        echo '<p>'.$Children.'</p>';
+                        echo '<p>' . $Children . '</p>';
                     }
                     echo '<h3>Total Cost</h3>';
-                    echo '<p>£'.$Cost.'</p>';
+                    echo '<p>£' . $Cost . '</p>';
                 ?>
                 <button class="purchasebutton" id="purchasebutton" disabled="true" type="submit" form="checkoutform">Purchase</button>
             </div>
