@@ -83,7 +83,7 @@
 
         <div class="checkout">
             <div class="thinleftbox">
-                <form method="POST" action="./php/booking/buyTickets.php">
+                <form id="checkoutform" method="POST" action="./php/booking/buyTickets.php">
                     <h4>Please enter your details</h4>
                     <p style="font-size: 0.6vw;"><i>These details are for the person purchasing the ticket</i></p>
                         <?php
@@ -185,7 +185,7 @@
                     echo '<h3>Total Cost</h3>';
                     echo '<p>£'.$Cost.'</p>';
                 ?>
-                <button class="purchasebutton" id="purchasebutton" disabled="true">Purchase</button>
+                <button class="purchasebutton" id="purchasebutton" disabled="true" type="submit" form="checkoutform">Purchase</button>
             </div>
         </div>
     </body>
