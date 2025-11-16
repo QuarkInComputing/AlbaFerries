@@ -29,6 +29,8 @@
             <link id="theme-desktop" rel="stylesheet" href="css/stylesheet.css"> 
             <link id="theme-mobile" rel="stylesheet" media="screen and (max-width: 992px)" href="css/mobile.css">
 
+            <link rel="stylesheet" href="css/sections/account.css">
+
             <!--Favicon-->
             <div id="favicon"><script src="./js/inner/favicon.js"></script></div>
 
@@ -67,7 +69,8 @@
                     <?php
                         echo '<b><p>'.$user->getForename().' '.$user->getSurname().'</p></b>';
                         echo '<p>'.$_SESSION['email'].'</p>';
-                        echo '<p>Total Tickets Purchased: '.$user->getTicketCount($DB).'</p>';
+                        $TicketCount = $user->getTicketCount($DB);
+                        echo '<p>Total Tickets Purchased: '.$TicketCount.'</p>';
                     ?>
                 </div>
 
@@ -130,11 +133,56 @@
         </section>
 
         <section id="ticket">
+            <h1>Your Tickets</h1>
 
+            <div class="tickets">
+                <table>
+                    <tr>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Date</th>
+                        <th>Leaves</th>
+                        <th>Arrives</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th></th> <!-- <a href="#">Print</a> -->
+                    </tr>
+                    <?php
+
+                        $Email = $user->getEmail();
+                        $stmt = $DB->prepare("SELECT b.FerryNo, BookingDate, FerryDepart, FerryArrive, BookingCost, BookingStatus, RouteDepart, RouteDestination FROM AlbaBooking b 
+                                            LEFT JOIN AlbaFerry f ON b.FerryNo=f.FerryNo 
+                                            LEFT JOIN AlbaRoute r ON r.RouteNo=f.RouteNo
+                                            WHERE CustomerEmail=?");
+                        $stmt->bind_param("s", $Email);
+                        $stmt->execute();
+
+                        $result = $stmt->get_result();
+
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<tr>";
+                            echo "<td>" . $row['RouteDepart'] . "</td>";
+                            echo "<td>" . $row['RouteDestination'] . "</td>";
+                            echo "<td>" . $row['BookingDate'] . "</td>";
+                            echo "<td>" . $row['FerryDepart'] . "</td>";
+                            echo "<td>" . $row['FerryArrive'] . "</td>";
+                            echo "<td>£" . $row['BookingCost'] . "</td>";
+                            echo "<td>" . $row['BookingStatus'] . "</td>";
+                            echo '<td><a href="#">Print</a></td>';
+                            echo "</tr>";
+                        }
+
+                        $stmt->close();
+                    ?>
+                </table>
+            </div>
         </section>
 
         <section id="settings">
-
+            <h1>Account Settings</h1>
+            <div class="settings">
+                <a href="./php/logout.php"><button class="logoutbutton">Logout</button></a>        
+            </div>            
         </section>
     </body>
 

@@ -62,6 +62,8 @@
             $stmt->bind_result($No);
             $stmt->fetch();
 
+            $stmt->close();
+
             return $No;
         }
 
