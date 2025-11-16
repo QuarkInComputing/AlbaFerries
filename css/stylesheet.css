@@ -415,8 +415,8 @@ body {
 }
 
 .buttonenable {
-    color: white;
-    background: #d84100;
+    color: white !important;
+    background: #d84100 !important;
     transition: 2s;
 }
 
@@ -448,4 +448,43 @@ input[type="submit"] {
 .backlink {
     font-family: "Instrument Sans", sans-serif;
     padding-top: 1%;
+}
+
+.checkout .thickrightbox {
+    text-align: center;
+}
+
+.checkout .thickrightbox h2 {
+    color: #222222;
+}
+
+.checkoutfields {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    width: 75%;
+    font-size: 0.8vw;
+}
+
+.checkoutfields input,
+.checkoutfields select {
+    padding: 12px;
+    width: 10vw;
+    border-radius: 6px;
+    font-family: "Instrument Sans", sans-serif;
+    cursor: pointer;
+}
+
+.checkoutfields option {
+    cursor: pointer;
+}
+
+.purchasebutton {
+    background-color:#444444;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 10px;
+    width: 12%;
+    transition: 1s;
 }

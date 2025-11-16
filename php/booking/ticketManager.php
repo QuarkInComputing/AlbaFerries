@@ -128,16 +128,19 @@
             echo    '<td>'.$this->Departure.' @ '.$Depart.'</td>';
             echo    '<td>'.$this->Departure.' @ '.$Arrive.'</td>';
             echo    '<td>£'.number_format($Price, 2).'</td>'; 
-            echo    '<td><a href="./checkout.php?'.$this->TicketType.
-                            '&Adults='.$this->Adults.
-                            '&Teens='.$this->Teens.
-                            '&Children='.$this->Children.
-                            '&From='.$this->From.
-                            '&To='.$this->To.
-                            '&Departure='.$this->Departure.
-                            '&Return='.$this->Return.
-                            '&Day='.$this->Day.
-                            '&Ferry='.$FerryNo.
+            echo    '<td><a href="./checkout.php?tickettype='.$this->TicketType.
+                            '&adults='.$this->Adults.
+                            '&teens='.$this->Teens.
+                            '&children='.$this->Children.
+                            '&from='.$this->From.
+                            '&to='.$this->To.
+                            '&departure='.$this->Departure.
+                            '&return='.$this->Return.
+                            '&departuretime='.$Depart.
+                            '&arrivaltime='.$Arrive.
+                            '&day='.$this->Day.
+                            '&cost='.number_format($Price, 2).
+                            '&ferry='.$FerryNo.
                             '">Buy</a></td>';
             echo '</tr>';
         }

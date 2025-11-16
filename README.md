@@ -126,7 +126,6 @@ CREATE TABLE IF NOT EXISTS AlbaFerry (
 CREATE TABLE IF NOT EXISTS AlbaBooking (
 	BookingNo int(12) NOT NULL AUTO_INCREMENT,
     CustomerEmail varchar(50) NOT NULL,
-    PassengerNo int(3) NOT NULL,
     FerryNo int(8) NOT NULL,
     BookingStatus varchar(10),
     primary key (BookingNo),
@@ -135,7 +134,7 @@ CREATE TABLE IF NOT EXISTS AlbaBooking (
 );
 
 CREATE TABLE IF NOT EXISTS AlbaPassenger (
-	PassengerNo int(3) NOT NULL,
+	PassengerNo int(10) NOT NULL,
     PassengerForename varchar(30) NOT NULL,
     PassengerSurname varchar(40) NOT NULL,
     PassengerAgeBracket varchar(10) NOT NULL,
