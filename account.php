@@ -67,11 +67,8 @@
                     <?php
                         echo '<b><p>'.$user->getForename().' '.$user->getSurname().'</p></b>';
                         echo '<p>'.$_SESSION['email'].'</p>';
+                        echo '<p>Total Tickets Purchased: '.$user->getTicketCount($DB).'</p>';
                     ?>
-                    <!-- 
-                    Current Tickets < Ill get around to this once I have the ordering system sorted
-                    Total Tickets 
-                    -->
                 </div>
 
                 <div class="thickrightbox">

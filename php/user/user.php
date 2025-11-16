@@ -49,11 +49,20 @@
             //Concat will hopefully trick mysql into thinking the details have changed, even when they havent
             $stmt->bind_param("ssssss", $this->Forename, $this->Surname, $this->DOB, $this->Phone, $this->Password, $firstEmail);
 
-            if (!$stmt->execute()) {
-                return false;
-            } else {
-                return true;
-            }
+            $stmt->execute();
+        }
+
+        function getTicketCount($DB) {
+            $stmt = $DB->prepare("SELECT count(*) FROM AlbaBooking WHERE CustomerEmail=?");
+            $stmt->bind_param("s", $this->Email);
+
+            $stmt->execute();
+
+            $stmt->store_result();
+            $stmt->bind_result($No);
+            $stmt->fetch();
+
+            return $No;
         }
 
         //Getters & Setters
