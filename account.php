@@ -159,17 +159,20 @@
 
                         $result = $stmt->get_result();
 
+                        $TicketNo = 1;
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>";
-                            echo "<td>" . $row['RouteDepart'] . "</td>";
-                            echo "<td>" . $row['RouteDestination'] . "</td>";
-                            echo "<td>" . $row['BookingDate'] . "</td>";
-                            echo "<td>" . $row['FerryDepart'] . "</td>";
-                            echo "<td>" . $row['FerryArrive'] . "</td>";
-                            echo "<td>£" . $row['BookingCost'] . "</td>";
-                            echo "<td>" . $row['BookingStatus'] . "</td>";
-                            echo '<td><a href="#">Print</a></td>';
+                            echo "<td id='From{$TicketNo}'>" . $row['RouteDepart'] . "</td>";
+                            echo "<td id='To{$TicketNo}'>" . $row['RouteDestination'] . "</td>";
+                            echo "<td id='Date{$TicketNo}'>" . $row['BookingDate'] . "</td>";
+                            echo "<td id='Leaves{$TicketNo}'>" . $row['FerryDepart'] . "</td>";
+                            echo "<td id='Arrives{$TicketNo}'>" . $row['FerryArrive'] . "</td>";
+                            echo "<td id='Price{$TicketNo}'>£" . $row['BookingCost'] . "</td>";
+                            echo "<td id='Status{$TicketNo}'>" . $row['BookingStatus'] . "</td>";
+                            echo "<td><a href='#' onClick='printTicket({$TicketNo}, \"{$user->getEmail()}\")'>Print</a></td>";
                             echo "</tr>";
+
+                            $TicketNo++;
                         }
 
                         $stmt->close();
@@ -184,10 +187,21 @@
                 <a href="./php/logout.php"><button class="logoutbutton">Logout</button></a>        
             </div>            
         </section>
+
+        <section id="printsection">
+            <img src="./media/logo.webp"></img>
+            <h1 id="printemail"></h1>
+            <h2 id="printdate"></h1>
+            <p id="printfrom"></p>
+            <p id="printto"></p>
+            <h2 id="printcost"></h2>
+            <i id="printstatus"></i>
+        </section>
     </body>
 
     <script src="./js/account.js"></script>
     <script src="./js/sections/account.js"></script>
     <script src="./js/ajax/updateHandler.js"></script>
+    <script src="./js/print.js"></script>
 
 </html>

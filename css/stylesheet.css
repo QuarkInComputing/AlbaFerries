@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+#printsection {
+    display: none;
+}
+
 html{
     margin: 0;
 }
@@ -506,4 +510,8 @@ input[type="submit"] {
     background-color: #c23131;
     cursor: pointer;
     transition: 1s;
+}
+
+#printsection img {
+    width: 15%;
 }
