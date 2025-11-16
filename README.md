@@ -128,13 +128,14 @@ CREATE TABLE IF NOT EXISTS AlbaBooking (
     CustomerEmail varchar(50) NOT NULL,
     FerryNo int(8) NOT NULL,
     BookingStatus varchar(10),
+    BookingDate datetime NOT NULL,
     primary key (BookingNo),
     foreign key (CustomerEmail) references AlbaCustomer (CustomerEmail),
     foreign key (FerryNo) references AlbaFerry (FerryNo)
 );
 
 CREATE TABLE IF NOT EXISTS AlbaPassenger (
-	PassengerNo int(10) NOT NULL,
+	PassengerNo int(10) NOT NULL AUTO_INCREMENT,
     PassengerForename varchar(30) NOT NULL,
     PassengerSurname varchar(40) NOT NULL,
     PassengerAgeBracket varchar(10) NOT NULL,
