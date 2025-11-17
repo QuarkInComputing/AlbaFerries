@@ -515,3 +515,20 @@ input[type="submit"] {
 #printsection img {
     width: 15%;
 }
+
+.adminferry table {
+    border: 1px solid #555555;
+    border-collapse: collapse;
+    font-family: "Instrument Sans", sans-serif;
+}
+
+.adminferry table th,
+.adminferry table td {
+    border: 1px solid #555555;
+    padding: 1vw;
+    width: 12vw;
+}
+
+.adminferry h1, p {
+    font-family: "Instrument Sans", sans-serif;
+}
