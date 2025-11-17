@@ -25,88 +25,199 @@
     $DepartureTime = $_POST['departuretime'];
     $ArrivalTime   = $_POST['arrivaltime'];
     $Day           = $_POST['day'];
+    $Cost          = $_POST['cost'];
     $FerryNo       = $_POST['ferryno'];
+    $FerryNo2      = $_POST['ferryno2'];
 
     //Passenger Information
     $BookingForename   = $_POST['bookingforename'];
     $BookingSurname    = $_POST['bookingsurname'];
     $BookingWheelchair = isset($_POST['bookingwheelchair']);
 
-    for ($i = 1; $i < $Adults; $i++) { // < NOT <= to account for person booking
-        ${'AdultForename' . ($i + 1)}   = $_POST['adult' . ($i + 1) . 'forename'];
-        ${'AdultSurname' . ($i + 1)}    = $_POST['adult' . ($i + 1) . 'surname'];
-        ${'AdultWheelchair' . ($i + 1)} = isset($_POST['adult' . ($i + 1) . 'wheelchair']);
-    }
+    if($TicketType == "single"){
+        for ($i = 1; $i < $Adults; $i++) { // < NOT <= to account for person booking
+            ${'AdultForename' . ($i + 1)}   = $_POST['adult' . ($i + 1) . 'forename'];
+            ${'AdultSurname' . ($i + 1)}    = $_POST['adult' . ($i + 1) . 'surname'];
+            ${'AdultWheelchair' . ($i + 1)} = isset($_POST['adult' . ($i + 1) . 'wheelchair']);
+        }
 
-    for ($i = 1; $i <= $Teens; $i++) {
-        ${'TeenForename' . $i}   = $_POST['teen' . $i . 'forename'];
-        ${'TeenSurname' . $i}    = $_POST['teen' . $i . 'surname'];
-        ${'TeenWheelchair' . $i} = isset($_POST['teen' . $i . 'wheelchair']);
-    }
+        for ($i = 1; $i <= $Teens; $i++) {
+            ${'TeenForename' . $i}   = $_POST['teen' . $i . 'forename'];
+            ${'TeenSurname' . $i}    = $_POST['teen' . $i . 'surname'];
+            ${'TeenWheelchair' . $i} = isset($_POST['teen' . $i . 'wheelchair']);
+        }
 
-    for ($i = 1; $i <= $Children; $i++) {
-        ${'ChildForename' . $i}   = $_POST['child' . $i . 'forename'];
-        ${'ChildSurname' . $i}    = $_POST['child' . $i . 'surname'];
-        ${'ChildWheelchair' . $i} = isset($_POST['child' . $i . 'wheelchair']);
-    }
+        for ($i = 1; $i <= $Children; $i++) {
+            ${'ChildForename' . $i}   = $_POST['child' . $i . 'forename'];
+            ${'ChildSurname' . $i}    = $_POST['child' . $i . 'surname'];
+            ${'ChildWheelchair' . $i} = isset($_POST['child' . $i . 'wheelchair']);
+        }
 
-    $Status = "Booked";
-    $BookingEmail = $user->getEmail();
-    $stmt = $DB->prepare("INSERT INTO AlbaBooking (CustomerEmail, FerryNo, BookingStatus, BookingDate) VALUES
-                        (?, ?, ?, ?);");
-    $stmt->bind_param("siss", $BookingEmail, $FerryNo, $Status, $Departure);
-    $stmt->execute();
+        $Status = "Booked";
+        $BookingEmail = $user->getEmail();
+        $stmt = $DB->prepare("INSERT INTO AlbaBooking (CustomerEmail, FerryNo, BookingStatus, BookingDate, BookingCost) VALUES
+                            (?, ?, ?, ?, ?);");
+        $stmt->bind_param("sissi", $BookingEmail, $FerryNo, $Status, $Departure, $Cost);
+        $stmt->execute();
 
-    $BookingNo = $DB->insert_id;
+        $BookingNo = $DB->insert_id;
 
-    $stmt->close();
+        $stmt->close();
 
-    //Adult making booking
-    $AgeBracket = "Adult";
-    $stmt = $DB->prepare("INSERT INTO AlbaPassenger (PassengerForename, PassengerSurname, PassengerAgeBracket, PassengerWheelchair, BookingNo) VALUES
-                        (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssii", $BookingForename, $BookingSurname, $AgeBracket, $BookingWheelchair, $BookingNo);
-    $stmt->execute();
-    
-    $stmt->close();
+        //Adult making booking
+        $AgeBracket = "Adult";
+        $stmt = $DB->prepare("INSERT INTO AlbaPassenger (PassengerForename, PassengerSurname, PassengerAgeBracket, PassengerWheelchair, BookingNo) VALUES
+                            (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssii", $BookingForename, $BookingSurname, $AgeBracket, $BookingWheelchair, $BookingNo);
+        $stmt->execute();
+        
+        $stmt->close();
 
-    //Other Adults
-    if($Adults > 1 ){
-        for($i = 1; $i < $Adults; $i++) {
+        //Other Adults
+        if($Adults > 1 ){
+            for($i = 1; $i < $Adults; $i++) {
+                $stmt = $DB->prepare("INSERT INTO AlbaPassenger (PassengerForename, PassengerSurname, PassengerAgeBracket, PassengerWheelchair, BookingNo) VALUES
+                            (?, ?, ?, ?, ?)");
+                $stmt->bind_param("sssii", ${'AdultForename' . ($i + 1)}, ${'AdultSurname' . ($i + 1)}, $AgeBracket, ${'AdultWheelchair' . ($i + 1)}, $BookingNo);
+                $stmt->execute();
+
+                $stmt->close();
+            }
+        }
+
+        //Teens
+        $AgeBracket = "Teen";
+        for($i = 1; $i <=$Teens; $i++) {
             $stmt = $DB->prepare("INSERT INTO AlbaPassenger (PassengerForename, PassengerSurname, PassengerAgeBracket, PassengerWheelchair, BookingNo) VALUES
-                        (?, ?, ?, ?, ?)");
-            $stmt->bind_param("sssii", ${'AdultForename' . ($i + 1)}, ${'AdultSurname' . ($i + 1)}, $AgeBracket, ${'AdultWheelchair' . ($i + 1)}, $BookingNo);
+                            (?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssii", ${'TeenForename' . $i}, ${'TeenSurname' . $i}, $AgeBracket, ${'TeenWheelchair' . $i}, $BookingNo);
             $stmt->execute();
 
             $stmt->close();
         }
+
+        //Children
+        $AgeBracket = "Child";
+
+        for($i = 1; $i <=$Children; $i++) {
+            $stmt = $DB->prepare("INSERT INTO AlbaPassenger (PassengerForename, PassengerSurname, PassengerAgeBracket, PassengerWheelchair, BookingNo) VALUES
+                            (?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssii", ${'ChildForename' . $i}, ${'ChildSurname' . $i}, $AgeBracket, ${'ChildWheelchair' . $i}, $BookingNo);
+            $stmt->execute();
+
+            $stmt->close();
+        }
+        $DB->close();
+
+        header('Location: ../../account.php');
     }
 
-    //Teens
-    $AgeBracket = "Teen";
-    for($i = 1; $i <=$Teens; $i++) {
-        $stmt = $DB->prepare("INSERT INTO AlbaPassenger (PassengerForename, PassengerSurname, PassengerAgeBracket, PassengerWheelchair, BookingNo) VALUES
-                        (?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssii", ${'TeenForename' . $i}, ${'TeenSurname' . $i}, $AgeBracket, ${'TeenWheelchair' . $i}, $BookingNo);
+    if($TicketType == "return"){
+        for ($i = 1; $i < $Adults; $i++) { // < NOT <= to account for person booking
+        ${'AdultForename' . ($i + 1)}   = $_POST['adult' . ($i + 1) . 'forename'];
+        ${'AdultSurname' . ($i + 1)}    = $_POST['adult' . ($i + 1) . 'surname'];
+        ${'AdultWheelchair' . ($i + 1)} = isset($_POST['adult' . ($i + 1) . 'wheelchair']);
+        }
+
+        for ($i = 1; $i <= $Teens; $i++) {
+            ${'TeenForename' . $i}   = $_POST['teen' . $i . 'forename'];
+            ${'TeenSurname' . $i}    = $_POST['teen' . $i . 'surname'];
+            ${'TeenWheelchair' . $i} = isset($_POST['teen' . $i . 'wheelchair']);
+        }
+
+        for ($i = 1; $i <= $Children; $i++) {
+            ${'ChildForename' . $i}   = $_POST['child' . $i . 'forename'];
+            ${'ChildSurname' . $i}    = $_POST['child' . $i . 'surname'];
+            ${'ChildWheelchair' . $i} = isset($_POST['child' . $i . 'wheelchair']);
+        }
+
+        $Status = "Booked";
+        $BookingEmail = $user->getEmail();
+        $BookingEmail = $user->getEmail();
+        $stmt = $DB->prepare("INSERT INTO AlbaBooking (CustomerEmail, FerryNo, BookingStatus, BookingDate, BookingCost) VALUES
+                            (?, ?, ?, ?, ?);");
+        $stmt->bind_param("sissi", $BookingEmail, $FerryNo, $Status, $Departure, $Cost);
         $stmt->execute();
-
         $stmt->close();
-    }
 
-    //Children
-    $AgeBracket = "Child";
+        $BookingNo = $DB->insert_id;
 
-    for($i = 1; $i <=$Children; $i++) {
-        $stmt = $DB->prepare("INSERT INTO AlbaPassenger (PassengerForename, PassengerSurname, PassengerAgeBracket, PassengerWheelchair, BookingNo) VALUES
-                        (?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssii", ${'ChildForename' . $i}, ${'ChildSurname' . $i}, $AgeBracket, ${'ChildWheelchair' . $i}, $BookingNo);
+        if($Adults > 1 ){
+            for($i = 1; $i < $Adults; $i++) {
+                $stmt = $DB->prepare("INSERT INTO AlbaPassenger (PassengerForename, PassengerSurname, PassengerAgeBracket, PassengerWheelchair, BookingNo) VALUES
+                            (?, ?, ?, ?, ?)");
+                $stmt->bind_param("sssii", ${'AdultForename' . ($i + 1)}, ${'AdultSurname' . ($i + 1)}, $AgeBracket, ${'AdultWheelchair' . ($i + 1)}, $BookingNo);
+                $stmt->execute();
+
+                $stmt->close();
+            }
+        }
+
+        $AgeBracket = "Teen";
+        for($i = 1; $i <=$Teens; $i++) {
+            $stmt = $DB->prepare("INSERT INTO AlbaPassenger (PassengerForename, PassengerSurname, PassengerAgeBracket, PassengerWheelchair, BookingNo) VALUES
+                            (?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssii", ${'TeenForename' . $i}, ${'TeenSurname' . $i}, $AgeBracket, ${'TeenWheelchair' . $i}, $BookingNo);
+            $stmt->execute();
+
+            $stmt->close();
+        }
+
+        $AgeBracket = "Child";
+
+        for($i = 1; $i <=$Children; $i++) {
+            $stmt = $DB->prepare("INSERT INTO AlbaPassenger (PassengerForename, PassengerSurname, PassengerAgeBracket, PassengerWheelchair, BookingNo) VALUES
+                            (?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssii", ${'ChildForename' . $i}, ${'ChildSurname' . $i}, $AgeBracket, ${'ChildWheelchair' . $i}, $BookingNo);
+            $stmt->execute();
+
+            $stmt->close();
+        }
+
+        $stmt = $DB->prepare("INSERT INTO AlbaBooking (CustomerEmail, FerryNo, BookingStatus, BookingDate, BookingCost) VALUES
+                            (?, ?, ?, ?, ?);");
+        $stmt->bind_param("sissi", $BookingEmail, $FerryNo2, $Status, $Return, $Cost);
         $stmt->execute();
-
         $stmt->close();
-    }
-    $DB->close();
 
-    header('Location: ../../account.php');
+        $BookingNo = $DB->insert_id;    
+
+        if($Adults > 1 ){
+            for($i = 1; $i < $Adults; $i++) {
+                $stmt = $DB->prepare("INSERT INTO AlbaPassenger (PassengerForename, PassengerSurname, PassengerAgeBracket, PassengerWheelchair, BookingNo) VALUES
+                            (?, ?, ?, ?, ?)");
+                $stmt->bind_param("sssii", ${'AdultForename' . ($i + 1)}, ${'AdultSurname' . ($i + 1)}, $AgeBracket, ${'AdultWheelchair' . ($i + 1)}, $BookingNo);
+                $stmt->execute();
+
+                $stmt->close();
+            }
+        }
+
+        $AgeBracket = "Teen";
+        for($i = 1; $i <=$Teens; $i++) {
+            $stmt = $DB->prepare("INSERT INTO AlbaPassenger (PassengerForename, PassengerSurname, PassengerAgeBracket, PassengerWheelchair, BookingNo) VALUES
+                            (?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssii", ${'TeenForename' . $i}, ${'TeenSurname' . $i}, $AgeBracket, ${'TeenWheelchair' . $i}, $BookingNo);
+            $stmt->execute();
+
+            $stmt->close();
+        }
+
+        $AgeBracket = "Child";
+
+        for($i = 1; $i <=$Children; $i++) {
+            $stmt = $DB->prepare("INSERT INTO AlbaPassenger (PassengerForename, PassengerSurname, PassengerAgeBracket, PassengerWheelchair, BookingNo) VALUES
+                            (?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssii", ${'ChildForename' . $i}, ${'ChildSurname' . $i}, $AgeBracket, ${'ChildWheelchair' . $i}, $BookingNo);
+            $stmt->execute();
+
+            $stmt->close();
+        }
+
+        $DB->close();
+
+        header('Location: ../../account.php');
+    }
 ?>
 
 <!-- <?php

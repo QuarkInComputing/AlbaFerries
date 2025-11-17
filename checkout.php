@@ -20,6 +20,7 @@
     //Checkout spesefic vars
     $Day           = $_GET['day'];
     $FerryNo       = $_GET['ferry'];
+    $FerryNo2      = $_GET['ferry2'];
     $DepartureTime = $_GET['departuretime'];
     $ArrivalTime   = $_GET['arrivaltime'];
     $Cost          = $_GET['cost'];
@@ -175,7 +176,9 @@
                             echo '<input type="hidden" name="departuretime" value="' . $DepartureTime . '">';
                             echo '<input type="hidden" name="arrivaltime" value="' . $ArrivalTime . '">';
                             echo '<input type="hidden" name="day" value="' . $Day . '">';
+                            echo '<input type="hidden" name="cost" value="' . $Cost . '">';
                             echo '<input type="hidden" name="ferryno" value="' . $FerryNo . '">';
+                            echo '<input type="hidden" name="ferryno2" value="' . $FerryNo2 . '">';
                         ?>
                 </form>
             </div>
