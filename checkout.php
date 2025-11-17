@@ -20,7 +20,9 @@
     //Checkout spesefic vars
     $Day           = $_GET['day'];
     $FerryNo       = $_GET['ferry'];
-    $FerryNo2      = $_GET['ferry2'];
+    if($TicketType == "return"){
+        $FerryNo2      = $_GET['ferry2'];
+    }
     $DepartureTime = $_GET['departuretime'];
     $ArrivalTime   = $_GET['arrivaltime'];
     $Cost          = $_GET['cost'];
@@ -178,7 +180,9 @@
                             echo '<input type="hidden" name="day" value="' . $Day . '">';
                             echo '<input type="hidden" name="cost" value="' . $Cost . '">';
                             echo '<input type="hidden" name="ferryno" value="' . $FerryNo . '">';
-                            echo '<input type="hidden" name="ferryno2" value="' . $FerryNo2 . '">';
+                            if($TicketType == "return"){
+                                echo '<input type="hidden" name="ferryno2" value="' . $FerryNo2 . '">';
+                            }
                         ?>
                 </form>
             </div>
