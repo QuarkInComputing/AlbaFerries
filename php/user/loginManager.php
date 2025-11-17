@@ -16,19 +16,24 @@
         $user = new user($Email, $DB);
 
         if($type == 'login') {
-            $stmt = $DB->prepare("SELECT CustomerPassword FROM AlbaCustomer WHERE CustomerEmail=?");
+            $stmt = $DB->prepare("SELECT CustomerPassword, CustomerTier FROM AlbaCustomer WHERE CustomerEmail=?");
             $stmt->bind_param("s", $Email);
 
             $stmt->execute();
 
             $stmt->store_result();
-            $stmt->bind_result($Hash);
+            $stmt->bind_result($Hash,$Tier);
 
             $stmt->fetch();
 
             if(password_verify($Password, $Hash)) {
                 $_SESSION['email'] = $Email;
                 setcookie("loggedin", "true", time() + (10 * 365 * 24 *60 * 60), "/");
+                if($Tier == "admin"){
+                    setcookie("admin", "true", time() + (10 * 365 * 24 *60 * 60), "/");
+                } else {
+                    setcookie("admin", "false", time() + (10 * 365 * 24 *60 * 60), "/");
+                }
                 echo "redirect:index.html";
             } else {
                 echo "Incorrect Details";
