@@ -1,3 +1,6 @@
+<!-- 22010875 | 18/11/2025 -->
+<!-- User object used for repetetive statements and the easy storing of user data -->
+
 <?php
     Class user{
         private $Email;

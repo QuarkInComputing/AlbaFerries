@@ -1,3 +1,6 @@
+<!-- 22010875 | 18/11/2025 -->
+<!-- Object used to help with repetetive queries required as part of the booking system -->
+
 <?php
 class ticketManager
 {

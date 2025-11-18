@@ -1,3 +1,6 @@
+<!-- 22010875 | 18/11/2025 -->
+<!-- Account Page -->
+
 <?php
     session_start();
 

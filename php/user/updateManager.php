@@ -1,3 +1,6 @@
+<!-- 22010875 | 18/11/2025 -->
+<!-- Updates user details if they have changed -->
+
 <?php
     // ini_set('display_errors', 1);
     // ini_set('display_startup_errors', 1);

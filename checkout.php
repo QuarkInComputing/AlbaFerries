@@ -1,3 +1,6 @@
+<!-- 22010875 | 18/11/2025 -->
+<!-- Where users "buy" tickets -->
+
 <?php
     session_start();
 

@@ -1,3 +1,6 @@
+<!-- 22010875 | 18/11/2025 -->
+<!-- Displays found tickets -->
+
 <?php
     session_start();
 
